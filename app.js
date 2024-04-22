@@ -18,13 +18,13 @@ app.get('/', (req,res)=>{
   res.render('index')
 })
 
-app.post('/password', (req,res)=>{
+app.post('/', (req,res)=>{
   
   const input = req.body
   console.log('input', input)
-  console.log('password', generatePassword(input))
   const password = generatePassword(input)
-  res.render('detail', {password})
+  console.log('password', password)
+  res.render('index', {password, input})
 })
 
 //監聽伺服器
@@ -80,7 +80,10 @@ function generatePassword(option){
       return !option.exclude.includes(eachdata)
     })
   }
-
+  
+  if (data.length === 0 ) {
+    return "You must select at least one character set"
+  }
 
   for (let i = 1; i <= optionlength; i++) {
     password += data[Math.floor(Math.random() * data.length)]

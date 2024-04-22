@@ -14,13 +14,14 @@
     #form {
       padding: 10px;
       margin-top: 20px;
-      min-width: 600px;
-      min-height: 300px;
+      min-width: 800px;
+      min-height: 450px;
       background: #E9FFF9;
       display: flex;
       flex-direction: column;
-      outline: 3px solid green;
+      
       justify-content: space-around;
+      border-radius: 15px;
 
     }
     #form h3 {
@@ -28,22 +29,41 @@
     }
 
     .form-control {
-      outline: 3px solid pink;
+     
       display: flex;
       justify-content: space-between;
     }
     
     .form-right{
       
-      outline: 5px solid red;
+      
       width: 350px;
     }
-    .show {
-      background: #FAF4D3;
-      border-radius: 20px;
+    #show {
+      padding: 5px 10px;
+      background: #85C7F2;
+      border-radius: 10px;
+      display: flex;
+    }
+    #show #btn {
+      width: 150px;
+      border: none;
+      font-size: 22px;
+      background: #DBDBDB;
+    }
+    #show #btn:hover {
+      cursor: pointer;
+    }
+
+    #show .password-zone {
+      margin-left: 10px;
     }
     form * {
       margin: 5px;
+    }
+
+    .none {
+      display: none;
     }
     
 
@@ -51,62 +71,10 @@
   <title>密碼產生器</title>
 </head>
 <body>
-  <div class="container">
-    <form action="/password" id="form" method="post">
-      <h3>密碼產生器</h3>
-      <div class="form-control">
-        <label for="length">密碼長度</label>
-        <div class="form-right">
-          <input type="number" name="passwordlength" id="length" max="15" required>
-        </div>
-        
-      </div>
-      <div class="form-control">
-        <label for="lowercase">包含小寫英文字母</label>
-        <div class="form-right">
-          <input type="checkbox" id="lowercase" name="lowercase" value="on">
-          (eg. abcdefg)
-        </div>
-        
-      </div>
-      <div class="form-control">
-        <label for="uppercase">包含大寫英文字母</label>
-        <div class="form-right">
-          <input type="checkbox" id="uppercase" name="uppercase" value="on">
-          (eg. ABCDEFG)
-        </div>
-        
-      </div>
-      <div class="form-control">
-        <label for="number">包含數字</label>
-        <div class="form-right">
-          <input type="checkbox" id="number" name="number" value="on"> 
-          (eg. 0123456)
-        </div>
-      </div>
-      <div class="form-control">
-        <label for="symbols">包含標點符號</label>
-        <div class="form-right">
-          <input type="checkbox" id="symbols" name="symbols" value="on">
-          (eg. @#$%^)
-        </div>
-        
-      </div>
-      <div class="form-control">
-        <label for="exclude">要排除的文字</label>
-        <div class="form-right">
-          <input type="text" id="exclude" name="exclude">
-        </div>
-        
-      </div>
-      <button type="submit">產生密碼</button>
-      {{{body}}}
-    </form>
-
-    
-  </div>
+  
+  {{{body}}}
   
   
-  
+  <script src="/javascripts/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,65 @@
+<div class="container">
+  <form action="/" id="form" method="post">
+    <a href="/">
+      <h3>密碼產生器</h3>
+    </a>
+    <hr>
+    <div class="form-control">
+      <label for="length">密碼長度 *</label>
+      <div class="form-right">
+        <input type="number" name="passwordlength" id="length" min="4" max="15" style="width:330px" value={{input.passwordlength}} required>
+        <h6>密碼長度限制4至15字</h6>
+      </div>
+
+    </div>
+    <div class="form-control">
+      <label for="lowercase">包含小寫英文字母</label>
+      <div class="form-right">
+        <input type="checkbox" id="lowercase" name="lowercase" {{#if input.lowercase}}checked{{/if}}>
+        (eg. abcdefg)
+      </div>
+
+    </div>
+    <div class="form-control">
+      <label for="uppercase">包含大寫英文字母</label>
+      <div class="form-right">
+        <input type="checkbox" id="uppercase" name="uppercase" {{#if input.uppercase}}checked{{/if}}>
+        (eg. ABCDEFG)
+      </div>
+
+    </div>
+    <div class="form-control">
+      <label for="number">包含數字</label>
+      <div class="form-right">
+        <input type="checkbox" id="number" name="number" {{#if input.number}}checked{{/if}}>
+        (eg. 0123456)
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="symbols">包含標點符號</label>
+      <div class="form-right">
+        <input type="checkbox" id="symbols" name="symbols" {{#if input.symbols}}checked{{/if}}>
+        (eg. @#$%^)
+      </div>
+
+    </div>
+    <div class="form-control">
+      <label for="exclude">要排除的文字</label>
+      <div class="form-right">
+        <input type="text" id="exclude" name="exclude" style="width:330px" value={{input.exclude}}>
+      </div>
+
+    </div>
+    <div id="show">
+      <button type="submit" id="btn">產生密碼</button>
+      {{#if password}}
+      <div class="password-zone">
+        <h3>Your password is : {{password}}</h3>
+      </div>
+      {{/if}}
+    </div>
+    
+  </form>
+
+
+</div>
