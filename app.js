@@ -14,16 +14,17 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 
 //設定路由
+//主頁面
 app.get('/', (req,res)=>{
   res.render('index')
 })
-
+//表單提交時
 app.post('/', (req,res)=>{
   
   const input = req.body
-  console.log('input', input)
+  //console.log('input', input)
   const password = generatePassword(input)
-  console.log('password', password)
+  //console.log('password', password)
   res.render('index', {password, input})
 })
 
