@@ -35,7 +35,7 @@ app.listen(port, ()=>{
 
 
 function generatePassword(option){
-  const optionlength = parseInt(option.passwordlength)
+  const optionLength = parseInt(option.passwordLength)
   let data = []
   let password = ''
   const lowercase = [
@@ -77,8 +77,8 @@ function generatePassword(option){
   }
   
   if (option.exclude.length > 0 ) {
-    data = data.filter ((eachdata)=>{
-      return !option.exclude.includes(eachdata)
+    data = data.filter ((eachData)=>{
+      return !option.exclude.includes(eachData)
     })
   }
   
@@ -86,9 +86,41 @@ function generatePassword(option){
     return "You must select at least one character set"
   }
 
-  for (let i = 1; i <= optionlength; i++) {
+  //↓↓↓↓↓↓↓↓↓↓↓↓↓↓第二次繳交新增↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+  //把現有的字元組合重新洗牌
+  
+  data = getWashedArray(data)
+  
+
+  //↑↑↑↑↑↑↑↑↑↑↑↑↑↑第二次繳交新增↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+  for (let i = 1; i <= optionLength; i++) {
     password += data[Math.floor(Math.random() * data.length)]
   }
   return password
   
 }
+
+
+//↓↓↓↓↓↓↓↓↓↓↓↓↓↓第二次繳交新增↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+//重新排序陣列函式
+function getWashedArray(oldArray) {
+  let result = []
+  let RandomNumberArray = getRandomNumberArray(oldArray.length)
+  for (let i = 0; i < oldArray.length; i++) {
+    result.push(oldArray[RandomNumberArray[i]]);
+  }
+  return result
+}
+
+function getRandomNumberArray(count) {
+  let number = Array.from(Array(count).keys());
+  for (let index = number.length - 1; index >= 0; index--) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [number[index], number[randomIndex]] = [number[randomIndex], number[index]];
+  }
+  return number;
+}
+
+//↑↑↑↑↑↑↑↑↑↑↑↑↑↑第二次繳交新增↑↑↑↑↑↑↑↑↑↑↑↑↑↑
