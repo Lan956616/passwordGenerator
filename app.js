@@ -66,12 +66,15 @@ function generatePassword(option){
   if (option.lowercase === 'on') {
     data = data.concat(lowercase)
   }
+
   if (option.uppercase === 'on') {
     data = data.concat(uppercase)
   }
+
   if (option.number === 'on') {
     data = data.concat(number)
   }
+
   if (option.symbols === 'on') {
     data = data.concat(symbols)
   }
@@ -81,44 +84,83 @@ function generatePassword(option){
       return !option.exclude.includes(eachData)
     })
   }
-  
   if (data.length === 0 ) {
     return "You must select at least one character set"
   }
-
-  //↓↓↓↓↓↓↓↓↓↓↓↓↓↓第二次繳交新增↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-  //把現有的字元組合重新洗牌
   
-  data = getWashedArray(data)
+  //↓↓↓↓↓↓↓↓↓↓↓↓↓↓第三次繳交新增↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+  //如果有勾選此選項 則在 刪除掉不要的字元後的此選項 隨機選一
+  if (option.lowercase === 'on') {
+    const tempLowercase = lowercase.filter((eachLowercase) => {
+      return !option.exclude.includes(eachLowercase)
+    })
+    password += tempLowercase[Math.floor(Math.random() * tempLowercase.length)]
+  }
+
+    if (option.uppercase === 'on') {
+    const tempUppercase = uppercase.filter((eachUppercase) => {
+      return !option.exclude.includes(eachUppercase)
+    })
+    password += tempUppercase[Math.floor(Math.random() * tempUppercase.length)]
+  }
+
+   if (option.number === 'on') {
+    const tempNumber = number.filter((eachNumber) => {
+      return !option.exclude.includes(eachNumber)
+    })
+    password += tempNumber[Math.floor(Math.random() * tempNumber.length)]
+  }
   
+  if (option.symbols === 'on') {
+    const tempSymbols = symbols.filter((eachSymbols) => {
+      return !option.exclude.includes(eachSymbols)
+    })
+    password += tempSymbols[Math.floor(Math.random() * tempSymbols.length)]
+  }
 
-  //↑↑↑↑↑↑↑↑↑↑↑↑↑↑第二次繳交新增↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+  //console.log('個自取一', password)
+  //console.log('不要出現', option.exclude)
 
-  for (let i = 1; i <= optionLength; i++) {
+  
+  //接著在隨機從data陣列中隨機補足指定密碼長度
+  const leftPasswordLength = optionLength - password.length
+  for (let i = 1; i <= leftPasswordLength; i++) {
     password += data[Math.floor(Math.random() * data.length)]
   }
+  //console.log('補滿字數', password)
+
+  //再把產生好的密碼順序打散
+  password = getWashedString(password)
+
+  //console.log('洗牌後', password)
+
   return password
   
 }
+
+//↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑第三次繳交新增↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+
 
 
 //↓↓↓↓↓↓↓↓↓↓↓↓↓↓第二次繳交新增↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
 //重新排序陣列函式
-function getWashedArray(oldArray) {
-  let result = []
-  let RandomNumberArray = getRandomNumberArray(oldArray.length)
-  for (let i = 0; i < oldArray.length; i++) {
-    result.push(oldArray[RandomNumberArray[i]]);
+function getWashedString(oldString) {
+  let result = ''
+  let RandomNumberArray = getRandomNumberArray(oldString.length)
+  for (let i = 0; i < oldString.length; i++) {
+    result += oldString[RandomNumberArray[i]]
   }
   return result
 }
 
 function getRandomNumberArray(count) {
-  let number = Array.from(Array(count).keys());
+  let number = Array.from(Array(count).keys())
   for (let index = number.length - 1; index >= 0; index--) {
     const randomIndex = Math.floor(Math.random() * (index + 1));
-    [number[index], number[randomIndex]] = [number[randomIndex], number[index]];
+    [number[index], number[randomIndex]] = [number[randomIndex], number[index]]
   }
   return number;
 }
